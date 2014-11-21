@@ -1,0 +1,261 @@
+(def world-repl 
+     (apply vector 
+            (map (fn [_] 
+                   (apply vector (map (fn [_] (ref (struct cell 0 0))) 
+                                      (range dim)))) 
+                 (range dim))))
+(def world-repl 
+  (apply vector 
+    (map 
+      (fn [_] 
+        (apply vector 
+          (map 
+            (fn [_] 
+              (ref 
+                (struct cell 0 0)
+              )
+            ) 
+            (range dim)
+          )
+        )
+      ) 
+      (range dim)
+    )
+  )
+)
+(defrecord cell [food pher])
+(def world-repl 
+  (apply vector (map (fn [_] 
+        (apply vector (map (fn [_]  
+              (ref (struct cell 0 0))) 
+          (range dim)))) 
+    (range dim))))
+(def dim 30)
+(def world-repl 
+  (apply vector (map (fn [_] 
+        (apply vector (map (fn [_]  
+              (ref (struct cell 0 0))) 
+          (range dim)))) 
+    (range dim))))
+(def world-repl 
+  (apply vector (map (fn [_] 
+        (apply vector (map (fn [_]  
+              (atom (cell. 0 0))) 
+          (range dim)))) 
+    (range dim))))
+(atom (cell. 0 0))
+(fn [_]  
+              (atom (cell. 0 0)))
+(map (fn [_]  
+              (atom (cell. 0 0))) 
+          (range dim)
+)
+(apply vector (map (fn [_]  
+              (atom (cell. 0 0))) 
+          (range dim)))
+(apply vector (map (fn [_]  
+              (atom (cell. 0 0))) 
+          (range dim)))
+(map (fn [_] 
+        (apply vector (map (fn [_]  
+              (atom (cell. 0 0))) 
+          (range dim)));) 
+    (range dim)))
+(apply vector (map (fn [_]  
+              (atom (cell. 0 0))) 
+          (range dim)))
+(fn [_] 
+        (apply vector (map (fn [_]  
+              (atom (cell. 0 0))) 
+          (range dim)))) 
+(map (fn [_] 
+        (apply vector (map (fn [_]  
+              (atom (cell. 0 0))) 
+          (range dim)))) 
+    (range dim)
+)
+(fn [_] 
+        (apply vector (map (fn [_]  
+              (atom (cell. 0 0))) 
+          (range dim))))
+(map (fn [_] 
+        (apply vector (map (fn [_]  
+              (atom (cell. 0 0))) 
+          (range dim)))) 
+    (range dim))
+(for [y (range 8) x (range 8)] {:x x :y y})
+(partition  8 (for [y (range 8) x (range 8)] {:x x :y y}))
+(def world-repl 
+  (apply vector (map (fn [_] 
+        (apply vector (map (fn [_]  
+              (atom (cell. 0 0))) 
+          (range dim)))) 
+   (range dim))))
+(world-repl)
+(def world-repl 
+  (apply vector (map (fn [_] 
+        (apply vector (map (fn [_]  
+              (atom (cell. 0 0))) 
+          (range dim)))) 
+    (range dim))))
+(def world-repl 
+  (apply vector (map (fn [_] 
+        (apply vector (map (fn [_]  
+              (atom (cell. 0 0))) 
+          (range dim)))) 
+    (range dim))))
+(world 1 2)
+(-> world 1 2)
+(world-repl 1 2)
+(-> world-repl (nth 1) (nth 1))
+(defn place [[x y]]
+  (-> world (nth x) (nth y)))
+(defn place [[x y]]
+  (-> world-repl (nth x) (nth y)))
+(swap! (place 1 1) assoc :ant {:dir 1 :food 2})
+(swap! (place [1 1]) assoc :ant {:dir 1 :food 2})
+(dorun 
+  (for [x (range dim) y (range dim)]
+    (let [cell (deref (-> world-repl (nth x) (nth y)))]
+      (filter :ant cell))))
+(place [1 1])
+(dorun 
+  (for [x (range dim) y (range dim)]
+    (let [cell (deref (-> world-repl (nth x) (nth y)))]
+      (print cell))))
+(dorun 
+  (for [x (range dim) y (range dim)]
+    (let [cell (deref (-> world-repl (nth x) (nth y)))]
+      (when (:ant cell)
+            (print cell)))))
+(swap! (place [1 1]) assoc :ant {:dir 1 :food 2})
+(swap! (place [2 2]) assoc :ant {:dir 2 :food 3})
+(dorun 
+  (for [x (range dim) y (range dim)]
+    (let [cell (deref (-> world-repl (nth x) (nth y)))]
+      (when (:ant cell)
+        [x y]))))
+(dorun 
+  (let [result {}]
+  (for [x (range dim) y (range dim)]
+    (let [cell (deref (-> world-repl (nth x) (nth y)))]
+      (when (:ant cell)
+        (swap! result (conj result [x y]))
+)))
+(println result))
+)
+(dorun 
+  (let [result {}]
+  (for [x (range dim) y (range dim)]
+    (let [cell (deref (-> world-repl (nth x) (nth y)))]
+      (when (:ant cell)
+        (swap! result (conj result {x y}))
+)))
+(println result))
+)
+(dorun 
+  (let [result {}]
+  (for [x (range dim) y (range dim)]
+    (let [cell (deref (-> world-repl (nth x) (nth y)))]
+      (when (:ant cell)
+        (print cell)
+        ;(swap! result (conj result {x y}))
+)))
+(println result))
+)
+(swap! (place [1 1]) assoc :ant {:dir 1 :food 2})
+(swap! (place [2 2]) assoc :ant {:dir 2 :food 3})
+(dorun 
+  (let [result {}]
+  (for [x (range dim) y (range dim)]
+    (let [cell (deref (-> world-repl (nth x) (nth y)))]
+      (when (:ant cell)
+        (print cell)
+        ;(swap! result (conj result {x y}))
+)))
+(println result))
+)
+(place [1 1])
+(deref (place [1 1]))
+(:ant (deref (place [1 1])))
+(when (:ant (deref (place [1 1]))) true false)
+(when (not (nil? (:ant (deref (place [1 1]))))) true false)
+(:ant (deref (place [1 1])))
+(nil? (:ant (deref (place [1 1]))))
+(not (nil? (:ant (deref (place [1 1])))))
+(when (not (nil? (:ant (deref (place [1 1]))))) true false)
+(when (not (nil? (:ant (deref (place [1 1]))))) true)
+(when (:ant (deref (place [1 1]))) true)
+(dorun 
+  (let [result {}]
+  (for [x (range dim) y (range dim)]
+    (let [cell (deref (-> world-repl (nth x) (nth y)))]
+      (when (:ant cell)
+        (print cell)
+        ;(swap! result (conj result {x y}))
+)))
+(println result))
+)
+(dorun 
+  ;(let [result {}]
+  (for [x (range dim) y (range dim)]
+    (let [cell (deref (-> world-repl (nth x) (nth y)))]
+      (when (:ant cell)
+        (print cell)
+        ;(swap! result (conj result {x y}))
+)))
+;(println result))
+)
+(for [y (range 8) x (range 8)] {:x x :y y})
+(for [y (range 8) x (range 8)] [x y])
+(map (fn [coord] (println coord))
+     (for [y (range 8) x (range 8)] [x y]))
+(map (fn [coord] (println coord))(car [0 0])
+)
+(first [1 2])
+(rest [1 2])
+(first (rest [1 2]))
+(map (fn [coord] (= 1 (first (rest  coord))))
+     (for [y (range 8) x (range 8)] [x y]))
+(filter (fn [x] (= true x))
+(map (fn [coord] (= 1 (first (rest  coord))))
+     (for [y (range 8) x (range 8)] [x y])))
+(map (fn [coord] (= 1 (first (rest  coord))))
+)
+(mapcat (fn [coord] (when (= 1 (first (rest  coord))) [x y])
+     (for [y (range 8) x (range 8)] [x y]))
+)
+(mapcat (fn [coord] (when (= 1 (first (rest  coord))) coord)
+     (for [y (range 8) x (range 8)] [x y]))
+)
+(mapcat (fn [coord] (when (= 1 (first (rest  coord))) coord))
+     (for [y (range 8) x (range 8)] [x y]))
+(map (fn [coord] (when (= 1 (first (rest  coord))) coord))
+     (for [y (range 8) x (range 8)] [x y]))
+(map (fn [coord] (when (= 1 (first (rest  coord))) coord))
+     (for [y (range 8) x (range 8)] [x y]))
+(filter identity
+(map (fn [coord] (when (= 1 (first (rest  coord))) coord))
+     (for [y (range 8) x (range 8)] [x y])))
+(filter identity
+        (map (fn [coord] (when (:ant (place coord)) coord))
+             (for [y (range 8) x (range 8)] [x y])))
+(def world-repl 
+  (apply vector (map (fn [_] 
+        (apply vector (map (fn [_]  
+              (atom (cell. 0 0))) 
+          (range dim)))) 
+   (range dim))))
+(defn place [[x y]]
+  (-> world-repl (nth x) (nth y)))
+;(def world-repl1
+(swap! (place [1 1]) assoc :ant {:dir 1 :food 2})
+(swap! (place [2 2]) assoc :ant {:dir 2 :food 3})
+        (map (fn [coord] (when (:ant (place coord)) coord))
+             (for [y (range 8) x (range 8)] [x y]))
+(filter identity
+        (map (fn [coord] (when (:ant (deref (place coord))) coord))
+             (for [y (range 8) x (range 8)] [x y])))
+(int 5.5)
+(range 3)
+exit
